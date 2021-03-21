@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static ru.bevz.Constant.ERROR;
+import static ru.bevz.Constant.FILEPATH;
 
 public class StorageService {
 
@@ -20,9 +21,8 @@ public class StorageService {
 	}
 
 	private List<String> readFile() {
-		String filepath = "D:\\Aleksandr\\Study\\IT\\IdeaProjects\\stream-api-test-task\\src\\main\\resources\\words.txt";
 		List<String> listStr = new ArrayList<>();
-		try (BufferedReader reader = Files.newBufferedReader(Paths.get(filepath))) {
+		try (BufferedReader reader = Files.newBufferedReader(Paths.get(FILEPATH))) {
 			listStr = reader.lines().collect(Collectors.toList());
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(

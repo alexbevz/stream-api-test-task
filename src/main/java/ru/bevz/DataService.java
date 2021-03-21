@@ -1,7 +1,6 @@
 package ru.bevz;
 
 
-
 import java.util.*;
 import java.util.function.Function;
 import java.util.regex.Pattern;
@@ -17,11 +16,11 @@ public class DataService {
 	}
 
 	private Set<Character> getVowelLetters(String word) {
-      return Arrays.stream(word.split(""))
-              .filter(x -> x != null && !x.isEmpty() && "аеёиоуыэюяaeiouy".contains(x.toLowerCase(Locale.ROOT)))
-              .map(x -> x.toCharArray()[0])
-              .collect(Collectors.toSet());
-  }
+		return Arrays.stream(word.split(""))
+						.filter(x -> x != null && !x.isEmpty() && "аеёиоуыэюяaeiouy".contains(x.toLowerCase(Locale.ROOT)))
+						.map(x -> x.toCharArray()[0])
+						.collect(Collectors.toSet());
+	}
 
 	//Определить среднюю длину строки в файле words.txt (результат округляем, пустые строки не считаем)
 	public int wordsAverageLength() {
@@ -48,23 +47,23 @@ public class DataService {
 						.stream()
 						.flatMap(x -> Stream.of(getWords(x)))
 						.filter(x -> x.length() > 3)
-            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-            .entrySet()
-            .stream()
-            .max((o1, o2) -> (int) (o1.getValue() - o2.getValue()))
-            .orElse(new AbstractMap.SimpleEntry<>("", 0L))
-            .getKey();
+						.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+						.entrySet()
+						.stream()
+						.max((o1, o2) -> (int) (o1.getValue() - o2.getValue()))
+						.orElse(new AbstractMap.SimpleEntry<>("", 0L))
+						.getKey();
 	}
 
 	//Найти все слова в которых содержатся более 4 уникальных гласных в файле words.txt (выполнять параллельно)
 	public List<String> wordsWith5UniqueVowels() {
 		return storageService.getContent()
-            .parallelStream()
-            .flatMap(x -> Stream.of(getWords(x)))
-            .collect(Collectors.toSet())
-            .stream()
-            .filter(x -> getVowelLetters(x).size() > 4)
-            .collect(Collectors.toList());
+						.parallelStream()
+						.flatMap(x -> Stream.of(getWords(x)))
+						.collect(Collectors.toSet())
+						.stream()
+						.filter(x -> getVowelLetters(x).size() > 4)
+						.collect(Collectors.toList());
 	}
 
 }

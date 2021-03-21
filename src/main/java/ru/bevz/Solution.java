@@ -1,4 +1,4 @@
-package ru.oshkina;
+package ru.bevz;
 
 public class Solution {
 

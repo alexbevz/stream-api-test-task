@@ -8,6 +8,14 @@
     <artifactId>lesson_15</artifactId>
     <version>1.0</version>
 
+    <developers>
+        <developer>
+            <name>Bevz Aleksandr</name>
+            <id>alexbevz</id>
+            <email>as-bivz@yandex.ru</email>
+        </developer>
+    </developers>
+
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>

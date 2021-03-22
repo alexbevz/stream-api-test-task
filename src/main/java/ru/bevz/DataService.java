@@ -11,17 +11,6 @@ public class DataService {
 
 	private final StorageService storageService = new StorageService();
 
-	private String[] getWords(String content) {
-		return Pattern.compile("\\W", Pattern.UNICODE_CHARACTER_CLASS).split(content);
-	}
-
-	private Set<Character> getVowelLetters(String word) {
-		return Arrays.stream(word.split(""))
-						.filter(x -> x != null && !x.isEmpty() && "аеёиоуыэюяaeiouy".contains(x.toLowerCase(Locale.ROOT)))
-						.map(x -> x.toCharArray()[0])
-						.collect(Collectors.toSet());
-	}
-
 	//Определить среднюю длину строки в файле words.txt (результат округляем, пустые строки не считаем)
 	public int wordsAverageLength() {
 		return storageService.getContent()
@@ -66,4 +55,14 @@ public class DataService {
 						.collect(Collectors.toList());
 	}
 
+	private String[] getWords(String content) {
+		return Pattern.compile("\\W", Pattern.UNICODE_CHARACTER_CLASS).split(content);
+	}
+
+	private Set<Character> getVowelLetters(String word) {
+		return word != null ? word.chars()
+						.mapToObj(x -> (char) x)
+						.filter(x -> !x.toString().isEmpty() && "аеёиоуыэюяaeiouy".contains(x.toString().toLowerCase(Locale.ROOT)))
+						.collect(Collectors.toSet()) : new HashSet<>();
+	}
 }

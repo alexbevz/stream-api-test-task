@@ -7,26 +7,24 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.bevz.Constant.ERROR;
-import static ru.bevz.Constant.FILEPATH;
-
 public class StorageService {
 
-	private final List<String> content = readFile();
+	private final List<String> content = readFile("words.txt");
 
 	public List<String> getContent() {
 		return content;
 	}
 
-	private List<String> readFile() {
+	private List<String> readFile(String fileName) {
 		List<String> listStr = new ArrayList<>();
+		String path = "./src/main/resources/";
 		try {
-			listStr = Files.readAllLines(Paths.get(FILEPATH));
+			listStr = Files.readAllLines(Paths.get(path + fileName));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(
 							null,
 							"Файл не найден!",
-							ERROR,
+							"Ошибка",
 							JOptionPane.ERROR_MESSAGE,
 							null
 			);
